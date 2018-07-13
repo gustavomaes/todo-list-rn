@@ -13,7 +13,7 @@ const panelStyles = StyleSheet.create({
   doneText: {
     color: colors.white,
     paddingBottom: padding.md,
-    fontSize: fonts.sm,
+    fontSize: fonts.md,
     fontFamily: fonts.family,
     marginRight: padding.md
   },
@@ -28,12 +28,12 @@ const panelStyles = StyleSheet.create({
   },
   countText: {
     color: colors.white,
-    fontSize: fonts.md,
+    fontSize: fonts.lg,
     fontFamily: fonts.family,
   },
   countSubText: {
     color: colors.white,
-    fontSize: fonts.sm,
+    fontSize: fonts.md,
     fontFamily: fonts.family,
   }
 })

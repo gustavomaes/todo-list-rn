@@ -29,7 +29,7 @@ const panelStyles = StyleSheet.create({
     color: colors.white,
     paddingBottom: padding.md,
     paddingLeft: padding.md,
-    fontSize: fonts.sm,
+    fontSize: fonts.md,
     fontFamily: fonts.family,
   }
 })

@@ -6,14 +6,17 @@ export const dimensions = {
 }
   
 export const colors  = {
-  primary: '#226B74',
-  secondary: '#254B5A',
-  tertiary: '#5DA6A7',
+  primary: '#448aff',
+  primaryLight: '#c0caff',
+  secondary: '#e57373',
 
-  white: '#f0f0ed'
+  white: '#f0f0ed',
+  grayLight: '#d3d3d3',
+  grayDark: '#414141'
 }
 
 export const padding = {
+  mc: 5,
   sm: 10,
   md: 20,
   lg: 40,
@@ -23,6 +26,7 @@ export const padding = {
 export const fonts = {
   sm: 10,
   md: 13,
+  base: 16,
   lg: 20,
   xl: 27,
 

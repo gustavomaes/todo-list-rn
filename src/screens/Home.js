@@ -1,16 +1,16 @@
 import React from 'react'
 
-import {ScrollView, View} from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Font } from 'expo';
 
 import Header from '../components/Header';
-import ListItem from '../components/ListItem';
+import RenderList from '../components/RenderList';
+import FloatButton from '../components/FloatButton';
 
 class Home extends React.Component {
 
     state = {
         fontLoaded: false,
-        currentlyOpenSwipeable: null
     }
 
     async componentDidMount() {
@@ -22,17 +22,7 @@ class Home extends React.Component {
 
     render() {
 
-        const { currentlyOpenSwipeable } = this.state;
-        const itemProps = {
-            onOpen: (event, gestureState, swipeable) => {
-                if (currentlyOpenSwipeable && currentlyOpenSwipeable !== swipeable) {
-                    currentlyOpenSwipeable.recenter();
-                }
 
-                this.setState({ currentlyOpenSwipeable: swipeable });
-            },
-            onClose: () => this.setState({ currentlyOpenSwipeable: null })
-        }
 
         return (
             <View >
@@ -40,17 +30,16 @@ class Home extends React.Component {
                 <ScrollView onScroll={this.handleScroll}>
                     {
                         this.state.fontLoaded ? (
-                            <Header />
+                            <View>
+                                <Header />
+                                <RenderList />
+                            </View>
                         ) : null
                     }
-                    <ListItem {...itemProps} />
-                    <ListItem {...itemProps} />
-                    <ListItem {...itemProps} />
-                    <ListItem {...itemProps} />
-                    <ListItem {...itemProps} />
-                    <ListItem {...itemProps} />
-                    <ListItem {...itemProps} />
+
+
                 </ScrollView>
+                <FloatButton />
             </View>
         )
     }

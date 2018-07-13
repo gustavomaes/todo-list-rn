@@ -12,6 +12,13 @@ const styles = StyleSheet.create({
         marginTop: padding.xl,
         marginBottom: padding.md
     },
+    label: {
+        fontSize: fonts.base,
+        fontFamily: fonts.family,
+        width: 300,
+        color: colors.gray,
+        marginBottom: padding.md
+    },
     input: {
         fontSize: fonts.base,
         fontFamily: fonts.family,
@@ -20,19 +27,31 @@ const styles = StyleSheet.create({
         marginBottom: padding.md,
         color: colors.primary,
 
-        borderBottomColor: colors.primary,
+        borderBottomColor: colors.primary, 
+        borderBottomWidth: .5
+    },
+    inputDate: {
+        fontSize: fonts.base,
+        fontFamily: fonts.family,
+        width: 300,
+
+        marginBottom: padding.md,
+        color: colors.gray,
+
+        borderBottomColor: colors.primary, 
         borderBottomWidth: .5
     },
     labelRadio: {
         fontSize: fonts.base,
         fontFamily: fonts.family,
-        width: 300,
-        
-        color: colors.grayLight,
+        width: 266,
+        color: colors.gray,
+
     },
     radio: {
         borderBottomColor: colors.primary,
-        borderBottomWidth: .5
+        borderBottomWidth: .5,
+        marginBottom: padding.lg,
     }
 })
 

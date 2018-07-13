@@ -11,6 +11,7 @@ export const colors  = {
   secondary: '#e57373',
 
   white: '#f0f0ed',
+  gray: '#c2c2c2',
   grayLight: '#d3d3d3',
   grayDark: '#414141'
 }

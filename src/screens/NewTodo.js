@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { Text, View, StyleSheet } from 'react-native';
-import { Entypo } from '@expo/vector-icons';
+import { View, StyleSheet } from 'react-native';
 import NavigationHeader from '../components/NavigationHeader';
 import FormTask from '../components/FormTask';
 

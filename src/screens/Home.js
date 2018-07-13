@@ -9,6 +9,11 @@ import FloatButton from '../components/FloatButton';
 
 class Home extends React.Component {
 
+    static navigationOptions = {
+        header: null,
+        headerMode: 'none'
+    };
+
     state = {
         fontLoaded: false,
     }
@@ -21,11 +26,8 @@ class Home extends React.Component {
     }
 
     render() {
-
-
-
         return (
-            <View >
+            <View style={{backgroundColor: '#FFF'}}>
 
                 <ScrollView onScroll={this.handleScroll}>
                     {
@@ -39,7 +41,7 @@ class Home extends React.Component {
 
 
                 </ScrollView>
-                <FloatButton />
+                <FloatButton onPress={() => this.props.navigation.navigate('NewTodo')} />
             </View>
         )
     }

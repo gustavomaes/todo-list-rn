@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
         marginBottom: padding.md,
         color: colors.primary,
 
-        borderBottomColor: colors.primary, 
+        borderBottomColor: colors.primary,
         borderBottomWidth: .5
     },
     inputDate: {
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
         marginBottom: padding.md,
         color: colors.gray,
 
-        borderBottomColor: colors.primary, 
+        borderBottomColor: colors.primary,
         borderBottomWidth: .5
     },
     labelRadio: {
@@ -52,6 +52,22 @@ const styles = StyleSheet.create({
         borderBottomColor: colors.primary,
         borderBottomWidth: .5,
         marginBottom: padding.lg,
+    },
+    button: {
+        backgroundColor: colors.primary,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 2
+    },
+    buttonText: {
+        paddingTop: padding.sm,
+        paddingBottom: padding.sm,
+        fontSize: fonts.base,
+        fontFamily: fonts.family,
+        color: colors.white,
+        textAlign: 'center',        
     }
 })
 

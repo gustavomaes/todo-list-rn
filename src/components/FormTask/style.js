@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     icon: {
         textAlign: 'center',
         color: colors.primary,
-        marginTop: padding.xl,
+        marginTop: padding.lg,
         marginBottom: padding.md
     },
     label: {
@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
         width: 300,
 
         marginBottom: padding.md,
+        marginTop: padding.sm,
         color: colors.gray,
 
         borderBottomColor: colors.primary,
@@ -51,7 +52,7 @@ const styles = StyleSheet.create({
     radio: {
         borderBottomColor: colors.primary,
         borderBottomWidth: .5,
-        marginBottom: padding.lg,
+        marginBottom: padding.md,
     },
     button: {
         backgroundColor: colors.primary,
@@ -59,7 +60,8 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.8,
         shadowRadius: 2,
-        elevation: 2
+        elevation: 2,
+        marginTop: padding.lg
     },
     buttonText: {
         paddingTop: padding.sm,

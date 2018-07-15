@@ -15,7 +15,6 @@ class NewTodo extends React.Component {
     };
 
     render() {
-        console.log(this.props)
         return (
             <View style={styles.container}>
                 <NavigationHeader title='Add New Task' leftIcon='chevron-thin-left' navigation={this.props.navigation}/>

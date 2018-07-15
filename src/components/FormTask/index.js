@@ -6,6 +6,7 @@ import RadioForm, { RadioButton, RadioButtonInput, RadioButtonLabel } from 'reac
 import DateTimePicker from 'react-native-modal-datetime-picker'
 
 import styles from './style'
+import ContextAPI from '../../context/ContextAPI'
 
 class FormTask extends React.Component {
 
@@ -29,37 +30,49 @@ class FormTask extends React.Component {
             { label: 'Business', value: 1 }
         ]
         return (
-            <View style={styles.container}>
-                <FontAwesome name='pencil' size={60} style={styles.icon} />
-                <TextInput style={styles.input} placeholder="Title" underlineColorAndroid='transparent' />
-                <TextInput style={styles.input} placeholder="Description" underlineColorAndroid='transparent' />
-                <Text style={styles.label}>Task type</Text>
-                <RadioForm style={styles.radio}
-                    radio_props={radio_props}
-                    buttonColor={'#448aff'}
-                    selectedButtonColor={'#448aff'}
-                    buttonSize={17}
-                    labelStyle={styles.labelRadio}
-                    initial={0}
-                    onPress={(value) => { this.setState({ value: value }) }}
-                />
-
-                <TouchableOpacity onPress={this._showDateTimePicker}>
-                    <Text style={styles.inputDate}>Show DatePicker</Text>
-                </TouchableOpacity>
-
-                <DateTimePicker
-                    isVisible={this.state.isDateTimePickerVisible}
-                    mode={'datetime'}
-                    onConfirm={this._handleDatePicked}
-                    onCancel={this._hideDateTimePicker}
-                />
-
-                <TouchableOpacity style={styles.button} onPress={() => {}}>
-                    <Text style={styles.buttonText}>ADD TO MY LIST</Text>                    
-                </TouchableOpacity>
-
-            </View >
+            <ContextAPI.Consumer>
+                {context => (
+                    
+                    <View style={styles.container}>
+                        <FontAwesome name='pencil' size={60} style={styles.icon} />
+                        <TextInput style={styles.input} placeholder="Title" underlineColorAndroid='transparent' />
+                        <TextInput style={styles.input} placeholder="Description" underlineColorAndroid='transparent' />
+                        <Text style={styles.label}>Task type</Text>
+                        <RadioForm style={styles.radio}
+                            radio_props={radio_props}
+                            buttonColor={'#448aff'}
+                            selectedButtonColor={'#448aff'}
+                            buttonSize={17}
+                            labelStyle={styles.labelRadio}
+                            initial={0}
+                            onPress={(value) => { this.setState({ value: value }) }}
+                        />
+    
+                        <TouchableOpacity onPress={this._showDateTimePicker}>
+                            <Text style={styles.inputDate}>Show DatePicker</Text>
+                        </TouchableOpacity>
+    
+                        <DateTimePicker
+                            isVisible={this.state.isDateTimePickerVisible}
+                            mode={'datetime'}
+                            onConfirm={this._handleDatePicked}
+                            onCancel={this._hideDateTimePicker}
+                        />
+    
+    
+                        <View>
+                            <Text>{context.name}</Text>
+                            <Text>{context.age}</Text>
+                        </View>
+    
+                        <TouchableOpacity style={styles.button} onPress={() => { }}>
+                            <Text style={styles.buttonText}>ADD TO MY LIST</Text>
+                        </TouchableOpacity>
+    
+                        
+                    </View >
+                )}
+            </ContextAPI.Consumer>
         )
     }
 }

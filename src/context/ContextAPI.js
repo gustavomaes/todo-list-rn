@@ -1,8 +1,7 @@
 import React from 'react'
 
 const ContextAPI = React.createContext({
-    name: '',
-    age: ''
+    days: []
 })
 
 export default ContextAPI

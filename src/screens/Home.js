@@ -38,8 +38,11 @@ class Home extends React.Component {
                                 this.state.fontLoaded ? (
                                     <View>
                                         <Header />
-                                        {console.log(context)}
-                                        <RenderList />
+                                        {Object.keys(context.days).map( day => {
+                                            
+                                            return <RenderList key={day} day={day}/>
+                                        })}
+                                        
                                     </View>
                                 ) : null
                             }

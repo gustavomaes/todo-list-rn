@@ -28,6 +28,8 @@ class Home extends React.Component {
         this.setState({ fontLoaded: true })
     }
 
+
+
     render() {
         return (
             <ContextAPI.Consumer>

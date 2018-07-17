@@ -18,7 +18,14 @@ const RootStack = createStackNavigator(
 
 export default class App extends Component {
 
+    constructor(props) {
+        super(props)
+        
+        this.addTask = this.addTask.bind(this)
+    }
+
     state = {
+        update: false,
         days: {
             '2018-07-15T00:00:00-03:00': [
                 day1 = {
@@ -54,12 +61,6 @@ export default class App extends Component {
         - checked = false
     
     */
-
-
-    isInArray(value, array) {
-        return array.indexOf(value) > -1;
-    }
-
     addTask(task) {
         let day = moment(task.datetime)
         day.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
@@ -77,14 +78,14 @@ export default class App extends Component {
                 }
             ]
         } else {
-            // console.log('existe')
             days[day.format()].push({
                 time: task.datetime,
                 title: task.title,
                 checked: false
             })
         }
-        // console.log(days)
+
+        this.setState({days})
 
     }
 

@@ -1,25 +1,26 @@
 import React, { Component } from 'react'
 import Home from './src/screens/Home';
 import { createStackNavigator } from 'react-navigation';
-import NewTodo from './src/screens/NewTodo';
+import moment from 'moment';
 
+import NewTodo from './src/screens/NewTodo';
 import ContextAPI from './src/context/ContextAPI'
 
 const RootStack = createStackNavigator(
     {
-      Home: Home,
-      NewTodo: NewTodo,
+        Home: Home,
+        NewTodo: NewTodo,
     },
     {
-      initialRouteName: 'Home',
+        initialRouteName: 'Home',
     }
-  );
+);
 
 export default class App extends Component {
 
     state = {
         days: {
-            1: [
+            '2018-07-15T00:00:00-03:00': [
                 day1 = {
                     time: 1,
                     title: 'Tarefa 01',
@@ -31,7 +32,7 @@ export default class App extends Component {
                     checked: false
                 },
             ],
-            2: [
+            '2018-07-16T00:00:00-03:00': [
                 day1 = {
                     time: 1,
                     title: 'Tarefa 01',
@@ -46,13 +47,54 @@ export default class App extends Component {
         }
     }
 
-    changeName(name) {
-        this.setState({name})
+    /*  Task
+        - datetime
+        - title
+        - type
+        - checked = false
+    
+    */
+
+
+    isInArray(value, array) {
+        return array.indexOf(value) > -1;
     }
+
+    addTask(task) {
+        let day = moment(task.datetime)
+        day.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
+        day.format()
+
+        let days = this.state.days;
+        // console.log(day)
+
+        if (!Object.keys(days).includes(day.format())) {
+            days[day.format()] = [
+                {
+                    time: task.datetime,
+                    title: task.title,
+                    checked: false
+                }
+            ]
+        } else {
+            // console.log('existe')
+            days[day.format()].push({
+                time: task.datetime,
+                title: task.title,
+                checked: false
+            })
+        }
+        // console.log(days)
+
+    }
+
     render() {
         return (
-            <ContextAPI.Provider value={this.state}>
-                <RootStack/> 
+            <ContextAPI.Provider value={{
+                state: this.state,
+                addTask: this.addTask
+            }}>
+                <RootStack />
             </ContextAPI.Provider>
         );
     }

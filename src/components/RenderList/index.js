@@ -35,7 +35,7 @@ class RenderList extends React.Component {
                         </View>
 
                         {
-                            context.days[this.props.day].map(task => {
+                            context.state.days[this.props.day].map(task => {
                                 return <ListItem {...itemProps} item={task.title} date='18:35' check={task.checked} key={task.time}/>
                             })
                         }

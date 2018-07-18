@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Home from './src/screens/Home';
 import { createStackNavigator } from 'react-navigation';
 import moment from 'moment';
+import { AsyncStorage } from "react-native"
 
 import NewTodo from './src/screens/NewTodo';
 import ContextAPI from './src/context/ContextAPI'
@@ -20,39 +21,27 @@ export default class App extends Component {
 
     constructor(props) {
         super(props)
-        
+
         this.addTask = this.addTask.bind(this)
     }
 
     state = {
+        storedValue: null,
         update: false,
         days: {
-            '2018-07-15T00:00:00-03:00': [
-                day1 = {
-                    time: 1,
-                    title: 'Tarefa 01',
-                    checked: true
-                },
-                day2 = {
-                    time: 2,
-                    title: 'Tarefa 02',
-                    checked: false
-                },
-            ],
-            '2018-07-16T00:00:00-03:00': [
-                day1 = {
-                    time: 1,
-                    title: 'Tarefa 01',
-                    checked: false
-                },
-                day2 = {
-                    time: 2,
-                    title: 'Tarefa 02',
-                    checked: false
-                },
-            ]
         }
     }
+
+    async componentDidMount() {
+        let storedValue = await AsyncStorage.getItem("@MySuperStore:key");
+        if (storedValue) {
+            this.setState({days: JSON.parse(storedValue)})
+        }
+
+        console.log("Fetched data: ", storedValue);
+    }
+
+
 
     /*  Task
         - datetime
@@ -61,13 +50,12 @@ export default class App extends Component {
         - checked = false
     
     */
-    addTask(task) {
+    async addTask(task) {
         let day = moment(task.datetime)
         day.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
         day.format()
 
         let days = this.state.days;
-        // console.log(day)
 
         if (!Object.keys(days).includes(day.format())) {
             days[day.format()] = [
@@ -85,7 +73,19 @@ export default class App extends Component {
             })
         }
 
-        this.setState({days})
+        try {
+            this.setState({ days })
+            await AsyncStorage.setItem('@Store:list', this.state.days);
+        } catch (error) {
+            console.log(error)
+        }
+
+
+        let storedValue = this.setState.storedValue
+        if (storedValue == null) {
+            console.log("Writing data!");
+            storedValue = await AsyncStorage.setItem("@MySuperStore:key", JSON.stringify(days));
+        }
 
     }
 

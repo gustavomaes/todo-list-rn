@@ -5,11 +5,27 @@ import Swipeable from 'react-native-swipeable';
 import styles from './style'
 import ListItem from '../ListItem';
 import ContextAPI from '../../context/ContextAPI'
+import moment from 'moment';
 
 class RenderList extends React.Component {
 
     state = {
+        day: '',
+        calendar: '',
         currentlyOpenSwipeable: null
+    }
+
+    componentDidMount() {
+        const day = moment(this.props.day).format("MMM Do YY")
+        const calendar = moment(this.props.day).calendar(null, {
+            sameDay: '[Today]',
+            nextDay: '[Tomorrow]',
+            nextWeek: 'dddd',
+            lastDay: '[Yesterday]',
+            lastWeek: '[Last] dddd',
+            sameElse: 'DD/MM/YYYY'
+        })
+        this.setState({day, calendar})
     }
 
     render() {
@@ -30,13 +46,13 @@ class RenderList extends React.Component {
                 {context => (
                     <View>
                         <View style={styles.header}>
-                            <Text style={styles.title}>TODAY</Text>
-                            <Text style={styles.subtitle}>2018-10-11</Text>
+                            <Text style={styles.title}>{this.state.calendar}</Text>
+                            <Text style={styles.subtitle}>{this.state.day}</Text>
                         </View>
 
                         {
                             context.state.days[this.props.day].map(task => {
-                                return <ListItem {...itemProps} item={task.title} date='18:35' check={task.checked} key={task.time}/>
+                                return <ListItem {...itemProps} item={task.title} date={moment(task.time).format('LT')} check={task.checked} key={task.time}/>
                             })
                         }
                         

@@ -23,6 +23,10 @@ export default class App extends Component {
         super(props)
 
         this.addTask = this.addTask.bind(this)
+        this.checkTask = this.checkTask.bind(this)
+        this.deleteTask = this.deleteTask.bind(this)
+        this.updateAsyncStorage = this.updateAsyncStorage.bind(this)
+        
     }
 
     state = {
@@ -62,7 +66,6 @@ export default class App extends Component {
         day.format('X')
 
         let taskTime = moment(task.datetime).format('X')
-        console.log('task time: ' + taskTime)
         let days = this.state.days;
 
 
@@ -75,9 +78,6 @@ export default class App extends Component {
                 }
             ]
         } else {
-            console.log(days)
-            console.log(day)
-            console.log(day.format('X'))
             days[day.format('X')].push({
                 time: taskTime,
                 title: task.title,
@@ -85,20 +85,63 @@ export default class App extends Component {
             })
         }
 
+        await this.updateAsyncStorage(days)
+    }
+
+    async checkTask(idItem, idList) {
+        let days = this.state.days;
+        days[idList].map(i => {
+            if (i.time === idItem) {
+                
+                if(i.checked === true) {
+                    i.checked = false
+                }
+                else {
+                    i.checked = true
+                }
+
+                return
+            }
+        })
+
+        await this.updateAsyncStorage(days)
+    }
+
+    async deleteTask(idItem, idList) {
+        let days = this.state.days;
+        await days[idList].map(i => {
+            if (i.time === idItem) {
+                let index = days[idList].indexOf(i)
+                days[idList].splice(index, 1)
+
+                if (days[idList].length === 0) {
+                    delete days[idList]
+                    this.setState({ days: days })      
+                }
+
+                return
+            }
+        })
+
+        await this.updateAsyncStorage(days)
+    }
+
+    async updateAsyncStorage(days) {
         try {
             let daysJson = await JSON.stringify(days)
-            await AsyncStorage.setItem("@MySuperStore:list", daysJson);
+            await AsyncStorage.setItem("@MySuperStore:list", daysJson)
             this.setState({ days: days })            
-        } catch (error) { console.log('error: ' + error) }
-
-
+        } catch (error) { console.log('error: ' + error) }  
     }
+
 
     render() {
         return (
             <ContextAPI.Provider value={{
                 state: this.state,
-                addTask: this.addTask
+                addTask: this.addTask,
+                checkTask: this.checkTask,
+                deleteTask: this.deleteTask
             }}>
                 <RootStack />
             </ContextAPI.Provider>

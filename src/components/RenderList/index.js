@@ -55,7 +55,7 @@ class RenderList extends React.Component {
                             context.state.days[this.props.day]
                                 .sort(function (a, b) { return a.time - b.time })
                                 .map(task => {
-                                    return <ListItem {...itemProps} item={task.title} date={moment.unix(task.time).format('LT')} check={task.checked} key={task.time} />
+                                    return <ListItem {...itemProps} item={task.title} date={moment.unix(task.time).format('LT')} check={task.checked} key={task.time} idList={this.props.day} idItem={task.time} />
                                 })
                         }
 

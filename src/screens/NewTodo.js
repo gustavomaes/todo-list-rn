@@ -18,7 +18,7 @@ class NewTodo extends React.Component {
         return (
             <View style={styles.container}>
                 <NavigationHeader title='Add New Task' leftIcon='chevron-thin-left' navigation={this.props.navigation}/>
-                <FormTask />
+                <FormTask navigation={this.props.navigation}/>
             </View>
         )
     }

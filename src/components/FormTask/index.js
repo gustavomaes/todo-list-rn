@@ -28,7 +28,7 @@ class FormTask extends React.Component {
         this._hideDateTimePicker()
 
         const d = moment(date).format("MMMM Do YYYY, h:mm:ss");
-        this.setState({ 
+        this.setState({
             dateTime: date,
             dateTimeStr: d
         })
@@ -44,7 +44,7 @@ class FormTask extends React.Component {
                 {context => (
                     <View style={styles.container}>
                         <FontAwesome name='pencil' size={60} style={styles.icon} />
-                        <TextInput style={styles.input} placeholder="Title" underlineColorAndroid='transparent' onChangeText={(text) => this.setState({title: text})} />
+                        <TextInput style={styles.input} placeholder="Title" underlineColorAndroid='transparent' onChangeText={(text) => this.setState({ title: text })} />
                         <Text style={styles.label}>Task type</Text>
                         <RadioForm style={styles.radio}
                             radio_props={radio_props}
@@ -53,12 +53,13 @@ class FormTask extends React.Component {
                             buttonSize={17}
                             labelStyle={styles.labelRadio}
                             initial={this.state.type}
-                            onPress={(value) => {this.setState({ type: value })
+                            onPress={(value) => {
+                                this.setState({ type: value })
                             }}
                         />
 
                         <TouchableOpacity onPress={this._showDateTimePicker}>
-                            <Text style={styles.inputDate}>{ this.state.dateTime === '' ? 'Show DatePicker' : this.state.dateTimeStr}</Text>
+                            <Text style={styles.inputDate}>{this.state.dateTime === '' ? 'Show DatePicker' : this.state.dateTimeStr}</Text>
                         </TouchableOpacity>
 
                         <DateTimePicker
@@ -68,11 +69,15 @@ class FormTask extends React.Component {
                             onCancel={this._hideDateTimePicker}
                         />
 
-                        <TouchableOpacity style={styles.button} onPress={() => context.addTask({
-                            datetime: this.state.dateTime,
-                            title: this.state.title,
-                            type: this.state.type
-                        })}>
+                        <TouchableOpacity style={styles.button} onPress={() => {
+                            context.addTask({
+                                datetime: this.state.dateTime,
+                                title: this.state.title,
+                                type: this.state.type
+                            })
+                            this.props.navigation.goBack()
+                        }
+                        }>
                             <Text style={styles.buttonText}>ADD TO MY LIST</Text>
                         </TouchableOpacity>
 

@@ -34,8 +34,8 @@ class Home extends React.Component {
         return (
             <ContextAPI.Consumer>
                 {context => (
-                    <View style={{ backgroundColor: '#FFF' }}>
-                        <ScrollView onScroll={this.handleScroll}>
+                    <View style={{ backgroundColor: '#FFF', flex: 1 }}>
+                        <ScrollView  onScroll={this.handleScroll}>
                             {
                                 this.state.fontLoaded ? (
                                     <View>

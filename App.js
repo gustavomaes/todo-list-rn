@@ -33,12 +33,18 @@ export default class App extends Component {
     }
 
     async componentDidMount() {
-        let storedValue = await AsyncStorage.getItem("@MySuperStore:key");
-        if (storedValue) {
-            this.setState({days: JSON.parse(storedValue)})
+
+        try {
+            let storedValue = await AsyncStorage.getItem("@MySuperStore:list");
+            if (storedValue) {
+                this.setState({ days: JSON.parse(storedValue) })
+            }
+
+            console.log("Fetched data: ", storedValue);
+        } catch (error) {
+            console.log('error: ' + error)
         }
 
-        console.log("Fetched data: ", storedValue);
     }
 
 
@@ -53,39 +59,38 @@ export default class App extends Component {
     async addTask(task) {
         let day = moment(task.datetime)
         day.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
-        day.format()
+        day.format('X')
 
+        let taskTime = moment(task.datetime).format('X')
+        console.log('task time: ' + taskTime)
         let days = this.state.days;
 
-        if (!Object.keys(days).includes(day.format())) {
-            days[day.format()] = [
+
+        if (!Object.keys(days).includes(day.format('X'))) {
+            days[day.format('X')] = [
                 {
-                    time: task.datetime,
+                    time: taskTime,
                     title: task.title,
                     checked: false
                 }
             ]
         } else {
-            days[day.format()].push({
-                time: task.datetime,
+            console.log(days)
+            console.log(day)
+            console.log(day.format('X'))
+            days[day.format('X')].push({
+                time: taskTime,
                 title: task.title,
                 checked: false
             })
         }
 
         try {
-            this.setState({ days })
-            await AsyncStorage.setItem('@Store:list', this.state.days);
-        } catch (error) {
-            console.log(error)
-        }
+            let daysJson = await JSON.stringify(days)
+            await AsyncStorage.setItem("@MySuperStore:list", daysJson);
+            this.setState({ days: days })            
+        } catch (error) { console.log('error: ' + error) }
 
-
-        let storedValue = this.setState.storedValue
-        if (storedValue == null) {
-            console.log("Writing data!");
-            storedValue = await AsyncStorage.setItem("@MySuperStore:key", JSON.stringify(days));
-        }
 
     }
 

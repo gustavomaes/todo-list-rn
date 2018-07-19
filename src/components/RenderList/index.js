@@ -16,8 +16,9 @@ class RenderList extends React.Component {
     }
 
     componentDidMount() {
-        const day = moment(this.props.day).format("MMM Do YY")
-        const calendar = moment(this.props.day).calendar(null, {
+        const day = moment.unix(this.props.day).format("MMM Do YY")
+
+        const calendar = moment.unix(this.props.day).calendar(null, {
             sameDay: '[Today]',
             nextDay: '[Tomorrow]',
             nextWeek: 'dddd',
@@ -25,7 +26,7 @@ class RenderList extends React.Component {
             lastWeek: '[Last] dddd',
             sameElse: 'DD/MM/YYYY'
         })
-        this.setState({day, calendar})
+        this.setState({ day, calendar })
     }
 
     render() {
@@ -51,11 +52,13 @@ class RenderList extends React.Component {
                         </View>
 
                         {
-                            context.state.days[this.props.day].map(task => {
-                                return <ListItem {...itemProps} item={task.title} date={moment(task.time).format('LT')} check={task.checked} key={task.time}/>
-                            })
+                            context.state.days[this.props.day]
+                                .sort(function (a, b) { return a.time - b.time })
+                                .map(task => {
+                                    return <ListItem {...itemProps} item={task.title} date={moment.unix(task.time).format('LT')} check={task.checked} key={task.time} />
+                                })
                         }
-                        
+
                     </View>
                 )}
             </ContextAPI.Consumer>

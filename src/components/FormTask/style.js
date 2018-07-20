@@ -70,6 +70,9 @@ const styles = StyleSheet.create({
         fontFamily: fonts.family,
         color: colors.white,
         textAlign: 'center',        
+    },
+    warning: {
+        borderBottomColor: colors.warning,
     }
 })
 

@@ -1,7 +1,10 @@
 import React from 'react'
 
 const ContextAPI = React.createContext({
-    days: []
+    storedValue: null,
+    update: false,
+    days: {
+    }
 })
 
 export default ContextAPI

@@ -16,7 +16,9 @@ class FormTask extends React.Component {
         dateTimeStr: '',
         dateTime: '',
         title: '',
-        type: 0
+        type: 0,
+        warningTitle: false,
+        warningDate: false
     }
 
     _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true })
@@ -34,6 +36,24 @@ class FormTask extends React.Component {
         })
     }
 
+    addTask(context) {
+        if (this.state.title === '' || this.state.dateTime === '') {
+            let warningTitle = this.state.title === '' ? true : false
+            let warningDate = this.state.dateTime === '' ? true : false
+            
+            this.setState({ warningTitle, warningDate })
+
+            return
+        }
+
+        context.addTask({
+            datetime: this.state.dateTime,
+            title: this.state.title,
+            type: this.state.type
+        })
+        this.props.navigation.goBack()
+    }
+
     render() {
         let radio_props = [
             { label: 'Personal', value: 0 },
@@ -44,7 +64,7 @@ class FormTask extends React.Component {
                 {context => (
                     <View style={styles.container}>
                         <FontAwesome name='pencil' size={60} style={styles.icon} />
-                        <TextInput style={styles.input} placeholder="Title" underlineColorAndroid='transparent' onChangeText={(text) => this.setState({ title: text })} />
+                        <TextInput style={[styles.input, this.state.warningTitle ? styles.warning : '']} placeholder="Title" underlineColorAndroid='transparent' onChangeText={(text) => this.setState({ title: text })} />
                         <Text style={styles.label}>Task type</Text>
                         <RadioForm style={styles.radio}
                             radio_props={radio_props}
@@ -59,7 +79,7 @@ class FormTask extends React.Component {
                         />
 
                         <TouchableOpacity onPress={this._showDateTimePicker}>
-                            <Text style={styles.inputDate}>{this.state.dateTime === '' ? 'Show DatePicker' : this.state.dateTimeStr}</Text>
+                            <Text style={[styles.inputDate, this.state.warningDate ? styles.warning : '']}>{this.state.dateTime === '' ? 'Show DatePicker' : this.state.dateTimeStr}</Text>
                         </TouchableOpacity>
 
                         <DateTimePicker
@@ -69,15 +89,7 @@ class FormTask extends React.Component {
                             onCancel={this._hideDateTimePicker}
                         />
 
-                        <TouchableOpacity style={styles.button} onPress={() => {
-                            context.addTask({
-                                datetime: this.state.dateTime,
-                                title: this.state.title,
-                                type: this.state.type
-                            })
-                            this.props.navigation.goBack()
-                        }
-                        }>
+                        <TouchableOpacity style={styles.button} onPress={() => this.addTask(context)}>
                             <Text style={styles.buttonText}>ADD TO MY LIST</Text>
                         </TouchableOpacity>
 

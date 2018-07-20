@@ -26,13 +26,12 @@ class FormTask extends React.Component {
     _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false })
 
     _handleDatePicked = (date) => {
-        this.setState({ dateTime: date.toString() })
         this._hideDateTimePicker()
 
-        const d = moment(date).format("MMMM Do YYYY, h:mm:ss");
+        const dateStr = moment(date).format("MMMM Do YYYY, h:mm:ss");
         this.setState({
             dateTime: date,
-            dateTimeStr: d
+            dateTimeStr: dateStr
         })
     }
 
@@ -42,11 +41,11 @@ class FormTask extends React.Component {
             let warningDate = this.state.dateTime === '' ? true : false
             
             this.setState({ warningTitle, warningDate })
-
             return
         }
 
         context.addTask({
+            id: Date.now(),
             datetime: this.state.dateTime,
             title: this.state.title,
             type: this.state.type

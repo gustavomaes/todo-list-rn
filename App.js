@@ -25,6 +25,7 @@ export default class App extends Component {
         this.addTask = this.addTask.bind(this)
         this.checkTask = this.checkTask.bind(this)
         this.deleteTask = this.deleteTask.bind(this)
+        this.setStatistics = this.setStatistics.bind(this)
         this.updateAsyncStorage = this.updateAsyncStorage.bind(this)
         
     }
@@ -32,6 +33,9 @@ export default class App extends Component {
     state = {
         storedValue: null,
         update: false,
+        business: 0,
+        personal: 0,
+        complete: 0,
         days: {
         }
     }
@@ -44,10 +48,8 @@ export default class App extends Component {
                 this.setState({ days: JSON.parse(storedValue) })
             }
 
-            console.log("Fetched data: ", storedValue);
-        } catch (error) {
-            console.log('error: ' + error)
-        }
+            await this.setStatistics()
+        } catch (error) { }
 
     }
 
@@ -72,26 +74,31 @@ export default class App extends Component {
         if (!Object.keys(days).includes(day.format('X'))) {
             days[day.format('X')] = [
                 {
+                    id: task.id,
                     time: taskTime,
                     title: task.title,
-                    checked: false
+                    checked: false,
+                    type: task.type
                 }
             ]
         } else {
             days[day.format('X')].push({
+                id: task.id,
                 time: taskTime,
                 title: task.title,
-                checked: false
+                checked: false,
+                type: task.type
             })
         }
 
         await this.updateAsyncStorage(days)
+        await this.setStatistics()
     }
 
     async checkTask(idItem, idList) {
         let days = this.state.days;
         days[idList].map(i => {
-            if (i.time === idItem) {
+            if (i.id === idItem) {
                 
                 if(i.checked === true) {
                     i.checked = false
@@ -110,7 +117,7 @@ export default class App extends Component {
     async deleteTask(idItem, idList) {
         let days = this.state.days;
         await days[idList].map(i => {
-            if (i.time === idItem) {
+            if (i.id === idItem) {
                 let index = days[idList].indexOf(i)
                 days[idList].splice(index, 1)
 
@@ -126,12 +133,42 @@ export default class App extends Component {
         await this.updateAsyncStorage(days)
     }
 
+    async setStatistics () {
+        const days = this.state.days;
+        let personal = 0
+        let business = 0
+        let count = 0
+        let checked = 0
+        let complete = 0
+
+        await Object.keys(days).map(day => {
+            days[day].map(task => {
+                count ++
+                if (task.checked) {
+                    checked ++
+                }
+
+                if (task.type === 0) {
+                    personal ++
+                } else {
+                    business ++
+                }
+            })
+        })
+
+
+        complete = Math.round((checked * 100) / count)
+        this.setState({personal, business, complete})
+
+    }
+
     async updateAsyncStorage(days) {
         try {
             let daysJson = await JSON.stringify(days)
             await AsyncStorage.setItem("@MySuperStore:list", daysJson)
-            this.setState({ days: days })            
-        } catch (error) { console.log('error: ' + error) }  
+            this.setState({ days: days })   
+            await this.setStatistics()
+        } catch (error) { }  
     }
 
 

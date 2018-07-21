@@ -158,6 +158,9 @@ export default class App extends Component {
 
 
         complete = Math.round((checked * 100) / count)
+        if(count === 0) {
+            complete = 0
+        }
         this.setState({personal, business, complete})
 
     }

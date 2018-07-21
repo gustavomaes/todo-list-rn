@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, StatusBar } from 'react-native';
 import { Font } from 'expo';
 
 import Header from '../components/Header';
@@ -35,6 +35,7 @@ class Home extends React.Component {
             <ContextAPI.Consumer>
                 {context => (
                     <View style={{ backgroundColor: '#FFF', flex: 1 }}>
+                        <StatusBar barStyle='light-content'/>
                         <ScrollView  onScroll={this.handleScroll}>
                             {
                                 this.state.fontLoaded ? (

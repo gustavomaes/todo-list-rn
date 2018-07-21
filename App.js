@@ -59,8 +59,7 @@ export default class App extends Component {
         - datetime
         - title
         - type
-        - checked = false
-    
+        - checked = false    
     */
     async addTask(task) {
         let day = moment(task.datetime)
@@ -102,11 +101,9 @@ export default class App extends Component {
                 
                 if(i.checked === true) {
                     i.checked = false
-                }
-                else {
+                } else {
                     i.checked = true
                 }
-
                 return
             }
         })
@@ -125,7 +122,6 @@ export default class App extends Component {
                     delete days[idList]
                     this.setState({ days: days })      
                 }
-
                 return
             }
         })
@@ -161,8 +157,8 @@ export default class App extends Component {
         if(count === 0) {
             complete = 0
         }
-        this.setState({personal, business, complete})
 
+        this.setState({personal, business, complete})
     }
 
     async updateAsyncStorage(days) {

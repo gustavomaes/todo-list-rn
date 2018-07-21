@@ -1,6 +1,5 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import Swipeable from 'react-native-swipeable';
 
 import styles from './style'
 import ListItem from '../ListItem';
@@ -8,7 +7,6 @@ import ContextAPI from '../../context/ContextAPI'
 import moment from 'moment';
 
 class RenderList extends React.Component {
-
     state = {
         day: '',
         calendar: '',

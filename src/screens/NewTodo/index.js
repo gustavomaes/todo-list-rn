@@ -1,15 +1,12 @@
 import React from 'react'
 
-import { View, StyleSheet, StatusBar } from 'react-native';
-import NavigationHeader from '../components/NavigationHeader';
-import FormTask from '../components/FormTask';
+import { View, StatusBar } from 'react-native';
+import NavigationHeader from '../../components/NavigationHeader';
+import FormTask from '../../components/FormTask';
+
+import styles from './style'
 
 class NewTodo extends React.Component {
-
-    state = {
-        fontLoaded: false,
-    }
-
     static navigationOptions = {
         header: null,
     };
@@ -24,14 +21,5 @@ class NewTodo extends React.Component {
         )
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#FFF',
-        alignItems: 'center',
-    }
-});
-
 
 export default NewTodo

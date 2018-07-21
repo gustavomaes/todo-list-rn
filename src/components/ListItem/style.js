@@ -1,4 +1,4 @@
-import { colors, fonts, padding, dimensions } from '../../styles/base.js'
+import { colors, fonts, padding } from '../../styles/base.js'
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
         height: 75,
         backgroundColor: 'white',
         alignItems: 'center',
-        // justifyContent: 'center',
         borderTopColor: colors.grayLight,
         borderTopWidth: StyleSheet.hairlineWidth
     },

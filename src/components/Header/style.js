@@ -1,4 +1,4 @@
-import { colors, fonts, padding, dimensions } from '../../styles/base.js'
+import { colors, fonts, padding } from '../../styles/base.js'
 import { StyleSheet } from 'react-native';
 
 const panelStyles = StyleSheet.create({

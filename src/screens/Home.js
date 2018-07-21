@@ -49,8 +49,6 @@ class Home extends React.Component {
                                     </View>
                                 ) : null
                             }
-
-
                         </ScrollView>
                         <FloatButton onPress={() => this.props.navigation.navigate('NewTodo')} />
                     </View>

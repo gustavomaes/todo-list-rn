@@ -12,11 +12,11 @@ Application developed in ReactNative for study
 
 ## Technology
 
-- **ReactNative**(https://github.com/facebook/react-native)**
-- **Expo**(https://github.com/expo/expo)**
-- **action-button**(https://github.com/mastermoo/react-native-action-button)**
-- **Native Swipeable**(https://github.com/jshanson7/react-native-swipeable)**
-- **react-navigation**(https://github.com/react-navigation/react-navigation)**
-- **moment**(https://github.com/moment/moment)**
+- **[ReactNative](https://github.com/facebook/react-native)**
+- **[Expo](https://github.com/expo/expo)**
+- **[action-button](https://github.com/mastermoo/react-native-action-button)**
+- **[Native Swipeable](https://github.com/jshanson7/react-native-swipeable)**
+- **[react-navigation](https://github.com/react-navigation/react-navigation)**
+- **[moment](https://github.com/moment/moment)**
 
 ## Developing

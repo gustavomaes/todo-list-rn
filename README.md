@@ -12,7 +12,7 @@ Application developed in ReactNative for study
 
 ## Technology
 
-- **[ReactNative]**(https://github.com/facebook/react-native)**
+- **ReactNative**(https://github.com/facebook/react-native)**
 - **Expo**(https://github.com/expo/expo)**
 - **action-button**(https://github.com/mastermoo/react-native-action-button)**
 - **Native Swipeable**(https://github.com/jshanson7/react-native-swipeable)**

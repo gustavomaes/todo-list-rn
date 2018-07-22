@@ -1,5 +1,15 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
+   "name": "To-Do List",
+   "icon": "./assets/icon.png",
+   "version": "1.0.0",
+   "slug": "todolistrn",
+   "sdkVersion": "27.0.0",
+   "ios": {
+     "bundleIdentifier": "com.gustavomaes.todolistrn"
+   },
+   "android": {
+     "package": "com.gustavomaes.todolistrn"
+   }
   }
 }

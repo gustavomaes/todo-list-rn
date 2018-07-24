@@ -6,7 +6,7 @@ Application developed in ReactNative for study
 ## Table of Contents
 
 - [Technology](#technology)
-- [Developing](#developing)
+- [Demo](#demo)
 
 
 
@@ -19,4 +19,7 @@ Application developed in ReactNative for study
 - **[react-navigation](https://github.com/react-navigation/react-navigation)**
 - **[moment](https://github.com/moment/moment)**
 
-## Developing
+## Demo
+
+- **[Android](https://play.google.com/store/apps/details?id=com.gustavomaes.todolistrn)**
+- iOS - coming soon
